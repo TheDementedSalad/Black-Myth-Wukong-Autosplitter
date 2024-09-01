@@ -41,7 +41,7 @@ onStart
 
 start
 {
-	return (current.Level == "/Game/00Main/Maps/HFS01/HFS01_PersistentLevel" || current.Level == "/Game/00Main/Maps/MGD/MGD_PersistentLevel") && current.isLoading == 0 && old.isLoading != 0;
+	return (current.Level == "HFS01/HFS01_PersistentLevel" || current.Level == "MGD/MGD_PersistentLevel") && current.isLoading == 0 && old.isLoading != 0;
 }
 
 split
