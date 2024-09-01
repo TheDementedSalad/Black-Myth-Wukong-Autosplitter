@@ -21,6 +21,8 @@ init
 	vars.Helper["localPlayer"].FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull;
 	
 	vars.Helper["isLoading"] = vars.Helper.Make<byte>(Loading, 0x240);
+	
+	vars.completedSplits = new HashSet<string>();
 }
 
 update
@@ -29,14 +31,14 @@ update
 	
 	vars.Helper.Update();
 	vars.Helper.MapPointers();
-	
-	//print(current.isLoading.ToString());
 }
 
 onStart
 {
 	// This makes sure the timer always starts at 0.00
 	timer.IsGameTimePaused = true;
+	
+	vars.completedSplits.Clear();
 }
 
 start
@@ -47,11 +49,23 @@ start
 split
 {  
 	string setting = "";
+	
+	if (!string.IsNullOrEmpty(current.Level) && current.Level != old.Level){
+		setting = current.Level;
+	}
+	
+	// Debug. Comment out before release.
+	if (!string.IsNullOrEmpty(setting))
+	vars.Log(setting);
+
+	if (settings.ContainsKey(setting) && settings[setting] && vars.completedSplits.Add(setting)){
+		return true;
+	}
 }
 
 isLoading
 {
-	return current.isLoading != 0 || current.localPlayer == null || current.Level == "/Game/00Main/Maps/Startup/Startup_V2_P";
+	return current.isLoading != 0 || current.localPlayer == null || current.Level == "Startup/Startup_V2_P";
 }
 
 exit
