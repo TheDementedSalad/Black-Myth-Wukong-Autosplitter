@@ -1,6 +1,6 @@
 <Settings>
     <Setting Id="Chapter" Label="Chapter Splits" State="false">
-		<Setting Id="Maps/HFS01/HFS01_PersistentLevel" Label="Finish Intro" State="false"/>
+		<Setting Id="HFS01/HFS01_PersistentLevel" Label="Finish Intro" State="false"/>
 		<Setting Id="HFM02/HFM02_PersistentLevel" Label="Finish Chapter 1" State="false"/>
 		<Setting Id="LYS/LYS_PersistentLevel" Label="Finish Chapter 2" State="false"/>
 		<Setting Id="PSD01/PSD_PersistentLevel" Label="Finish Chapter 3" State="false"/>
