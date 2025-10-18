@@ -10,14 +10,13 @@ startup
 
 init
 {
-	IntPtr gWorld = vars.Helper.ScanRel(3, "48 8B 05 ???????? 48 3B C? 48 0F 44 C? 48 89 05 ???????? E8");
 	IntPtr gEngine = vars.Helper.ScanRel(3, "48 89 05 ???????? 48 85 c9 74 ?? e8 ???????? 48 8d 4d");
 	IntPtr Loading = vars.Helper.ScanRel(3, "48 89 35 ???????? 48 89 74 24 ?? e8 ???????? 48 8b 4c 24 ?? 8d 7e");
 	
 	vars.Helper["Level"] = vars.Helper.MakeString(gEngine, 0x910, 0x24);
 	vars.Helper["Level"].FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull;
 	
-	vars.Helper["localPlayer"] = vars.Helper.Make<long>(gWorld, 0x1B8, 0x38, 0x0, 0x30);
+	vars.Helper["localPlayer"] = vars.Helper.Make<long>(gEngine, 0xDB8, 0x38, 0x0, 0x30);
 	vars.Helper["localPlayer"].FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull;
 	
 	vars.Helper["isLoading"] = vars.Helper.Make<byte>(Loading, 0x240);
@@ -55,8 +54,8 @@ split
 	}
 	
 	// Debug. Comment out before release.
-	if (!string.IsNullOrEmpty(setting))
-	vars.Log(setting);
+	//if (!string.IsNullOrEmpty(setting))
+	//vars.Log(setting);
 
 	if (settings.ContainsKey(setting) && settings[setting] && vars.completedSplits.Add(setting)){
 		return true;
